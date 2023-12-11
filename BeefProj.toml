@@ -7,6 +7,7 @@ DefaultNamespace = "AdventOfCode"
 
 [Configs.Debug.Win64]
 BeefLibType = "DynamicDebug"
+DebugWorkingDirectory = "$(ProjectDir)\\dist"
 
 [Configs.Release.Win64]
 CLibType = "Dynamic"

@@ -9,73 +9,79 @@ class Day11 : IDay
 		List<StringView> space = scope .();
 		input.ToLines(space);
 
-		List<Galaxy> galaxies = scope .();
 		int height = space.Count;
 		int width = space[0].Length;
+		Galaxy[] galaxyCountsX = scope .[width];
+		for (int x = 0; x < width; x++) { galaxyCountsX[x] = .() { Index = x }; }
+		Galaxy[] galaxyCountsY = scope .[height];
+		for (int y = 0; y < height; y++) { galaxyCountsY[y] = .() { Index = y }; }
+
+		for (int y = 0; y < height; y++)
 		{
-			HashSet<int> rowsFilled = scope .();
-			HashSet<int> colsFilled = scope .();
-			for (int j = 0; j < height; j++)
+			StringView line = space[y];
+			for (int x = 0; x < width; x++)
 			{
-				StringView line = space[j];
-				for (int i = 0; i < width; i++)
-				{
-					char8 c = line[i];
-					if (c == '#')
-					{
-						rowsFilled.Add(j);
-						colsFilled.Add(i);
-						galaxies.Add(.() { ID = galaxies.Count + 1, X = i, Y = j });
-					}
-				}
-			}
+				char8 c = line[x];
+				if (c != '#') { continue; }
 
-			for (int j = height - 1; j >= 0; j--)
-			{
-				if (rowsFilled.Contains(j)) { continue; }
-				for (int i = 0; i < galaxies.Count; i++)
-				{
-					ref Galaxy galaxy = ref galaxies[i];
-					if (galaxy.Y > j)
-					{
-						galaxy.EY++;
-					}
-				}
+				galaxyCountsY[y].Count++;
+				galaxyCountsX[x].Count++;
 			}
+		}
 
-			for (int j = width - 1; j >= 0; j--)
+		int expansions = 0;
+		int galaxiesY = 0;
+		for (int y = 0; y < height; y++)
+		{
+			if (galaxyCountsY[y].Count > 0)
 			{
-				if (colsFilled.Contains(j)) { continue; }
-				for (int i = 0; i < galaxies.Count; i++)
-				{
-					ref Galaxy galaxy = ref galaxies[i];
-					if (galaxy.X > j)
-					{
-						galaxy.EX++;
-					}
-				}
+				galaxiesY += galaxyCountsY[y].Count;
+				galaxyCountsY[y].Expansions = expansions;
+				continue;
 			}
+			expansions++;
+		}
+
+		expansions = 0;
+		int galaxiesX = 0;
+		for (int x = 0; x < width; x++)
+		{
+			if (galaxyCountsX[x].Count > 0)
+			{
+				galaxiesX += galaxyCountsX[x].Count;
+				galaxyCountsX[x].Expansions = expansions;
+				continue;
+			}
+			expansions++;
 		}
 
 		int total1 = 0;
 		int total2 = 0;
-		for (int i = 0; i < galaxies.Count; i++)
+		for (int i = galaxyCountsX.Count - 1, j = galaxiesX - 1; i >= 0; i--)
 		{
-			Galaxy galaxy1 = galaxies[i];
-			for (int j = i + 1; j < galaxies.Count; j++)
-			{
-				Galaxy galaxy2 = galaxies[j];
-				total1 += Math.Abs(galaxy1.GetX() - galaxy2.GetX()) + Math.Abs(galaxy1.GetY() - galaxy2.GetY());
-				total2 += Math.Abs(galaxy1.GetX(1000000) - galaxy2.GetX(1000000)) + Math.Abs(galaxy1.GetY(1000000) - galaxy2.GetY(1000000));
-			}
+			Galaxy galaxy = galaxyCountsX[i];
+			if (galaxy.Count == 0) { continue; }
+			int modifier = galaxy.Count * (j - galaxy.Count + 1);
+			total1 += galaxy.GetValue(2) * modifier;
+			total2 += galaxy.GetValue(1000000) * modifier;
+			j -= 2 * galaxy.Count;
+		}
+
+		for (int i = galaxyCountsY.Count - 1, j = galaxiesY - 1; i >= 0; i--)
+		{
+			Galaxy galaxy = galaxyCountsY[i];
+			if (galaxy.Count == 0) { continue; }
+			int modifier = galaxy.Count * (j - galaxy.Count + 1);
+			total1 += galaxy.GetValue(2) * modifier;
+			total2 += galaxy.GetValue(1000000) * modifier;
+			j -= 2 * galaxy.Count;
 		}
 
 		output.Append(scope $"{total1}\n{total2}");
 	}
 	private struct Galaxy
 	{
-		public int ID, X, Y, EX, EY;
-		public int GetX(int expansions = 2) { return X + EX * (expansions - 1); }
-		public int GetY(int expansions = 2) { return Y + EY * (expansions - 1); }
+		public int Index, Count, Expansions;
+		public int GetValue(int expansions) { return Index + Expansions * (expansions - 1); }
 	}
 }
