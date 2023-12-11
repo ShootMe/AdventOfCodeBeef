@@ -1,0 +1,9 @@
+BeefSpace_User.toml
+
+[Bb]uild/
+[Rr]ecovery/
+.vs/
+
+[Dd]ist/*.exe
+[Dd]ist/*Inputs/*.txt
+![Dd]ist/*Inputs/*Example.txt

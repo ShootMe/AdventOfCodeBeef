@@ -1,0 +1,14 @@
+FileVersion = 1
+
+[Project]
+Name = "AdventOfCodeBeef"
+StartupObject = "AdventOfCode.Program"
+DefaultNamespace = "AdventOfCode"
+
+[Configs.Debug.Win64]
+BeefLibType = "DynamicDebug"
+
+[Configs.Release.Win64]
+CLibType = "Dynamic"
+PostBuildCmds = ["copy $(BuildDir)\\AdventOfCodeBeef.exe $(ProjectDir)\\dist\\"]
+DebugWorkingDirectory = "$(ProjectDir)\\dist"
