@@ -49,7 +49,7 @@ class Program
 
 			List<StringView> answersToCheck = scope .();
 			((StringView)results).ToLines(answersToCheck, '\n');
-			if (answersToCheck.Count < 2) { answersToCheck.Add(String.Empty); answersToCheck.Add(String.Empty); }
+			if (answersToCheck.Count < 2) { answersToCheck.Add("n/a"); answersToCheck.Add("n/a"); }
 
 			WritePadded(scope $"{fileName}", 50, ' ', ConsoleColor.Yellow);
 			Write(" | ", ConsoleColor.Blue);
@@ -84,6 +84,7 @@ class Program
 			case 9: return new AdventOfCode.Y2023.Day09();
 			case 10: return new AdventOfCode.Y2023.Day10();
 			case 11: return new AdventOfCode.Y2023.Day11();
+			case 12: return new AdventOfCode.Y2023.Day12();
 			default: return null;
 		}
 	}
