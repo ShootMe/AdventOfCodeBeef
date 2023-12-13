@@ -13,3 +13,4 @@ DebugWorkingDirectory = "$(ProjectDir)\\dist"
 CLibType = "Dynamic"
 PostBuildCmds = ["copy $(BuildDir)\\AdventOfCodeBeef.exe $(ProjectDir)\\dist\\"]
 DebugWorkingDirectory = "$(ProjectDir)\\dist"
+EnvironmentVars = ["_NO_DEBUG_HEAP=1"]

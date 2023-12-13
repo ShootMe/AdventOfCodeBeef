@@ -56,7 +56,7 @@ class Program
 			Write(scope $"{answersToCheck[0]} ", answersToCheck[0] == answers[1] ? ConsoleColor.Green : ConsoleColor.Red);
 			WritePadded(scope $"{answersToCheck[1]}", 39 - answersToCheck[0].Length, ' ', answersToCheck[1] == answers[2] ? ConsoleColor.Green : ConsoleColor.Red);
 			Write(" | ", ConsoleColor.Blue);
-			WriteLine(scope $"{dayTimer.Elapsed.TotalSeconds}", ConsoleColor.Gray);
+			WriteLine(scope $"{dayTimer.Elapsed.TotalSeconds:0.000000}", ConsoleColor.Gray);
 
 			delete inputData;
 		}
@@ -65,7 +65,7 @@ class Program
 		WriteLine();
 
 		WritePadded(scope $"Total:", 96);
-		WriteLine(scope $"{allTimer.TotalSeconds}", ConsoleColor.Gray);
+		WriteLine(scope $"{allTimer.TotalSeconds:0.000000}", ConsoleColor.Gray);
 		Console.ReadLine(scope .());
 	}
 	private static IDay GetDay(StringView name)
@@ -85,6 +85,7 @@ class Program
 			case 10: return new AdventOfCode.Y2023.Day10();
 			case 11: return new AdventOfCode.Y2023.Day11();
 			case 12: return new AdventOfCode.Y2023.Day12();
+			case 13: return new AdventOfCode.Y2023.Day13();
 			default: return null;
 		}
 	}

@@ -29,6 +29,20 @@ extension Int
 			b = r;
 		}
 	}
+	public int PopCnt()
+	{
+	    const uint c1 = 0x55555555'55555555;
+	    const uint c2 = 0x33333333'33333333;
+	    const uint c3 = 0x0F0F0F0F'0F0F0F0F;
+	    const uint c4 = 0x01010101'01010101;
+
+		uint value = (uint)this;
+	    value -= (value >> 1) & c1;
+	    value = (value & c2) + ((value >> 2) & c2);
+	    value = (((value + (value >> 4)) & c3) * c4) >> 56;
+
+	    return (int)value;
+	}
 }
 extension StringView
 {
