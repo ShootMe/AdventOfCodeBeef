@@ -54,25 +54,30 @@ class Day12 : IDay
 			int extraCount = groupCount == remainingCount ? 0 : 1;
 
 			int count = 0;
+			int[] counts = scope .[Springs.Length - index];
+			int start = 0;
 			while (index + remainingCount <= Springs.Length)
 			{
+				int number = 0;
 				if (IsValid(index, groupCount, extraCount))
 				{
-					if (extraCount > 0)
-					{
-						count += Arrangements(index + groupCount + 1, groupIndex + 1, remainingCount - groupCount - 1, memory);
-					} else
-					{
-						count++;
-					}
+					number = extraCount == 0 ? 1 : Arrangements(index + groupCount + 1, groupIndex + 1, remainingCount - groupCount - 1, memory);
+					count += number;
 				}
+				counts[start++] = number;
 
 				if (Springs[index] == '#') { break; }
 				index++;
 			}
 
-			memory[memoryIndex] = count + 1;
-			return count;
+			int result = count;
+			for (int i = 0; i < start; i++)
+			{
+				memory[memoryIndex++] = count + 1;
+				count -= counts[i];
+			}
+
+			return result;
 		}
 		private bool IsValid(int index, int size, int pad)
 		{
