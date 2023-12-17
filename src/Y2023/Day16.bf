@@ -27,26 +27,29 @@ class Day16 : IDay
 		Queue<Beam> beams = scope .();
 		HashSet<Beam> seen = scope .(height * width * 2);
 		HashSet<Vector2> energized = scope .(height * width);
-		int max1 = EnergizedTiles(.(255, 0, 1, 0), beams, seen, energized);
+		HashSet<Vector2> edges = scope .(height + width + height + width + 4);
+		int max1 = EnergizedTiles(.(255, 0, 1, 0), beams, seen, energized, edges);
 		int max2 = max1;
+
 		for (uint8 y = 1; y < height; y++)
 		{
-			int tiles = EnergizedTiles(.(255, y, 1, 0), beams, seen, energized);
+			int tiles = edges.Add(.(255, y)) ? EnergizedTiles(.(255, y, 1, 0), beams, seen, energized, edges) : 0;
 			if (tiles > max2) { max2 = tiles; }
-			tiles = EnergizedTiles(.(width, y, 255, 0), beams, seen, energized);
+			tiles = edges.Add(.(width, y)) ? EnergizedTiles(.(width, y, 255, 0), beams, seen, energized, edges) : 0;
 			if (tiles > max2) { max2 = tiles; }
 		}
+
 		for (uint8 x = 0; x < width; x++)
 		{
-			int tiles = EnergizedTiles(.(x, 255, 0, 1), beams, seen, energized);
+			int tiles = edges.Add(.(x, 255)) ? EnergizedTiles(.(x, 255, 0, 1), beams, seen, energized, edges) : 0;
 			if (tiles > max2) { max2 = tiles; }
-			tiles = EnergizedTiles(.(x, height, 0, 255), beams, seen, energized);
+			tiles = edges.Add(.(x, height)) ? EnergizedTiles(.(x, height, 0, 255), beams, seen, energized, edges) : 0;
 			if (tiles > max2) { max2 = tiles; }
 		}
 
 		output.Append(scope $"{max1}\n{max2}");
 	}
-	private int EnergizedTiles(Beam start, Queue<Beam> beams, HashSet<Beam> seen, HashSet<Vector2> energized)
+	private int EnergizedTiles(Beam start, Queue<Beam> beams, HashSet<Beam> seen, HashSet<Vector2> energized, HashSet<Vector2> edges)
 	{
 		seen.Clear();
 		energized.Clear();
@@ -58,7 +61,12 @@ class Day16 : IDay
 			energized.Add(current.Position);
 
 			Beam next = current.GetNext();
-			if (next.Position.X >= width || next.Position.Y >= height || !seen.Add(next)) { continue; }
+			if (next.Position.X >= width || next.Position.Y >= height)
+			{
+				edges.Add(next.Position);
+				continue;
+			}
+			if (!seen.Add(next)) { continue; }
 
 			char8 position = grid[(int)next.Position.Y * width + (int)next.Position.X];
 			if (position == '.' || (position == '-' && next.Direction.X != 0) || (position == '|' && next.Direction.Y != 0))
