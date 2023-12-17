@@ -24,10 +24,10 @@ class Day16 : IDay
 			}
 		}
 
-		Queue<Beam> beams = scope .();
-		HashSet<Beam> seen = scope .(height * width * 2);
-		HashSet<Vector2> energized = scope .(height * width);
-		HashSet<Vector2> edges = scope .(height + width + height + width + 4);
+		Queue<Beam> beams = scope .(128);
+		HashSet<Beam> seen = scope .(height * width * 4);
+		HashSet<Vector2> energized = scope .(height * width * 2);
+		HashSet<Vector2> edges = scope .((height + width) * 6);
 		int max1 = EnergizedTiles(.(255, 0, 1, 0), beams, seen, energized, edges);
 		int max2 = max1;
 
