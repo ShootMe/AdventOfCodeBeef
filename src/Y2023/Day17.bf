@@ -49,17 +49,12 @@ class Day17 : IDay
 		open.Add(.() { X = 0, Y = 0, Dir = 0, Count = 0, Loss = 0 });
 		open.Add(.() { X = 0, Y = 0, Dir = 1, Count = 0, Loss = 0 });
 
-		int min = int.MaxValue;
 		while (open.Count > 0)
 		{
 			Crucible current = open.Pop();
 			if (current.X == width - 1 && current.Y == height - 1)
 			{
-				if (current.Loss < min)
-				{
-					min = current.Loss;
-				}
-				continue;
+				return current.Loss;
 			}
 
 			if (current.Count < 3 || (ultra && current.Count < 10))
@@ -77,7 +72,7 @@ class Day17 : IDay
 				TryAdd(nextLeft);
 			}
 		}
-		return min;
+		return 0;
 	}
 	private struct Crucible : IHashable
 	{
