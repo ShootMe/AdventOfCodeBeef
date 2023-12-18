@@ -23,7 +23,7 @@ https://adventofcode.com/
  15 | :star: :star: |
  16 | :star: :star: |
  17 | :star: :star: |
- 18 | |
+ 18 | :star: :star: |
  19 | |
  20 | |
  21 | |
