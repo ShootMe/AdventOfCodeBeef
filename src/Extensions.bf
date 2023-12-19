@@ -82,21 +82,15 @@ extension StringView
 		{
 			StringView split = splits[i];
 			int newIndex = this.IndexOf(split, index);
-			if (newIndex >= 0)
+			if (newIndex > index)
 			{
 				output.Add(this[index ... newIndex - 1]);
-				index = newIndex + split.Length;
-			} else
-			{
-				output.Add(String.Empty);
 			}
+			index = newIndex + split.Length;
 		}
 		if (index < this.Length)
 		{
 			output.Add(this[index...]);
-		} else
-		{
-			output.Add(String.Empty);
 		}
 	}
 	public void ToInts(List<int> numbers, char8 splitChar = '\n')
