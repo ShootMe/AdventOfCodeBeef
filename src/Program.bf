@@ -92,6 +92,7 @@ class Program
 			case 17: return new AdventOfCode.Y2023.Day17();
 			case 18: return new AdventOfCode.Y2023.Day18();
 			case 19: return new AdventOfCode.Y2023.Day19();
+			case 20: return new AdventOfCode.Y2023.Day20();
 			default: return null;
 		}
 	}

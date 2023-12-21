@@ -6,28 +6,13 @@ extension Int
 	{
 		var b;
 		int a = (int)this;
-		if (this == 0 && b == 0) { return 1; }
-		a = a < 0 ? -a : a;
-		b = b < 0 ? -b : b;
-		if (a == 0) { return b; }
-		if (b == 0) { return a; }
-
-		int r;
-		if (b > a)
+		while (b != 0)
 		{
-			r = b % a;
-			if (r == 0) { return a; }
-			if (r == 1) { return 1; }
-			b = r;
-		}
-		while (true)
-		{
-			r = a % b;
-			if (r == 0) { return b; }
-			if (r == 1) { return 1; }
+			int r = a % b;
 			a = b;
 			b = r;
 		}
+		return a;
 	}
 	public int PopCnt()
 	{
