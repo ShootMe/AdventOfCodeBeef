@@ -27,7 +27,7 @@ https://adventofcode.com/
  19 | :star: :star: |
  20 | :star: :star: |
  21 | |
- 22 | |
+ 22 | :star: :star: |
  23 | |
  24 | |
  25 | |
