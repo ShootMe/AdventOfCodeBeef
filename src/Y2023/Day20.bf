@@ -58,15 +58,14 @@ class Day20 : IDay
 			while (pulses.Count > 0)
 			{
 				(Module sender, Module current) = pulses.PopFront();
-				int lastPresses;
-				if (sender.LastOutput && states.TryGetValue(sender.ID, out lastPresses) && presses > lastPresses)
+				if (sender.LastOutput && states.ContainsKey(sender.ID))
 				{
-					states[sender.ID] = presses - lastPresses;
+					states[sender.ID] = presses;
 
 					int total = 1;
 					for (int value in states.Values)
 					{
-						if (value == 0) { total = 0; break; }
+						if (value <= 0) { total = 0; break; }
 						total *= value / value.GCD(total);
 					}
 
@@ -151,11 +150,11 @@ class Day20 : IDay
 		{
 			if (sender.LastOutput) { return; }
 
+			LastOutput = !LastOutput;
 			for (int i = 0; i < Outputs.Count; i++)
 			{
 				pulses.Add((this, Outputs[i]));
 			}
-			LastOutput = !LastOutput;
 		}
 	}
 	private class Conjunction : Module
@@ -169,11 +168,11 @@ class Day20 : IDay
 				state &= Inputs[i].LastOutput;
 			}
 
+			LastOutput = !state;
 			for (int i = 0; i < Outputs.Count; i++)
 			{
 				pulses.Add((this, Outputs[i]));
 			}
-			LastOutput = !state;
 		}
 	}
 }
