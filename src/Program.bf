@@ -54,7 +54,13 @@ class Program
 			WritePadded(scope $"{fileName}", 50, ' ', ConsoleColor.Yellow);
 			Write(" | ", ConsoleColor.Blue);
 			Write(scope $"{answersToCheck[0]} ", answersToCheck[0] == answers[1] ? ConsoleColor.Green : ConsoleColor.Red);
-			WritePadded(scope $"{answersToCheck[1]}", 39 - answersToCheck[0].Length, ' ', answersToCheck[1] == answers[2] ? ConsoleColor.Green : ConsoleColor.Red);
+			if (answers[2].Length > 0)
+			{
+				WritePadded(scope $"{answersToCheck[1]}", 39 - answersToCheck[0].Length, ' ', answersToCheck[1] == answers[2] ? ConsoleColor.Green : ConsoleColor.Red);
+			} else
+			{
+				WritePadded("", 39 - answersToCheck[0].Length, ' ');
+			}
 			Write(" | ", ConsoleColor.Blue);
 			WriteLine(scope $"{dayTimer.Elapsed.TotalSeconds:0.000000}", ConsoleColor.Gray);
 
@@ -96,6 +102,8 @@ class Program
 			case 21: return new AdventOfCode.Y2023.Day21();
 			case 22: return new AdventOfCode.Y2023.Day22();
 			case 23: return new AdventOfCode.Y2023.Day23();
+			case 24: return new AdventOfCode.Y2023.Day24();
+			case 25: return new AdventOfCode.Y2023.Day25();
 			default: return null;
 		}
 	}

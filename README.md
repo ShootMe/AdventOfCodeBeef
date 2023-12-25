@@ -29,8 +29,8 @@ https://adventofcode.com/
  21 | :star: :star: |
  22 | :star: :star: |
  23 | :star: :star: |
- 24 | |
- 25 | |
+ 24 | :star: :star: |
+ 25 | :star: :star: |
 
 ### Input Files
 Are in the format puzzleXX\~Part1Solution\~Part2Solution.txt
