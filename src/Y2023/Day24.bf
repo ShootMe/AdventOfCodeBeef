@@ -24,6 +24,7 @@ class Day24 : IDay
 				total++;
 			}
 		}
+		snowballs.Sort();
 
 		const int vRange = 350;
 		Snowball s1 = snowballs[0]; s1.Velocity.x -= vRange;
@@ -86,15 +87,23 @@ class Day24 : IDay
 		}
 		public Intersection IntersectsXY(Snowball s2)
 		{
-			double d = (double)Velocity.y * s2.Velocity.x - Velocity.x * s2.Velocity.y;
+			int d = Velocity.x * s2.Velocity.y - Velocity.y * s2.Velocity.x;
 			if (d == 0 || Velocity.x == 0 || s2.Velocity.x == 0) { return .(false, (0, 0), 0, 0); }
 
 			double m1 = (double)Velocity.y / Velocity.x;
 			double m2 = (double)s2.Velocity.y / s2.Velocity.x;
-			double x = ((Position.y - m1 * Position.x) - (s2.Position.y - m2 * s2.Position.x)) / (m2 - m1);
-			double y = (Position.y - m1 * Position.x) + m1 * x;
+			double x = (Position.y - s2.Position.y + m2 * s2.Position.x - m1 * Position.x) / (m2 - m1);
+			double y = Position.y + m1 * (x - Position.x);
 
 			return .(true, ((int)x, (int)y), (int)((x - Position.x) / Velocity.x), (int)((x - s2.Position.x) / s2.Velocity.x));
+		}
+		public static int operator <=>(Snowball left, Snowball right)
+		{
+			int comp = left.Position.x <=> right.Position.x;
+			if (comp != 0) { return comp; }
+			comp = left.Position.y <=> right.Position.y;
+			if (comp != 0) { return comp; }
+			return left.Position.z <=> right.Position.z;
 		}
 		public int ZAt(double time, int offset)
 		{
