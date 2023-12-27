@@ -13,7 +13,7 @@ class Day25 : IDay
 		HashSet<Node> closed = scope .(nodes.Count);
 		Queue<Node> open = scope .(nodes.Count);
 		Dictionary<Node, (Node, Wire)> paths = scope .();
-		Node node1 = nodes[0];
+		Node node1 = nodes[^1];
 
 		int FindPath(Node node2)
 		{
@@ -43,6 +43,7 @@ class Day25 : IDay
 
 					Node next = wire.Left;
 					if (wire.Left == current) { next = wire.Right; }
+
 					if (closed.Add(next))
 					{
 						open.Add(next);
@@ -54,7 +55,7 @@ class Day25 : IDay
 			return closed.Count;
 		}
 
-		for (int i = 1; i < nodes.Count; i++)
+		for (int i = 0; i < nodes.Count; i++)
 		{
 			Node node2 = nodes[i];
 			used.Clear();
