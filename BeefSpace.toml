@@ -6,3 +6,5 @@ StartupProject = "AdventOfCodeBeef"
 
 [Configs.Release.Win64]
 BfSIMDSetting = "SSE41"
+RuntimeKind = "Reduced"
+ReflectKind = "Minimal"
