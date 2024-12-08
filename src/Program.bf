@@ -107,12 +107,12 @@ class Program
 
 			case (2024, 1): return new AdventOfCode.Y2024.Day01();
 			case (2024, 2): return new AdventOfCode.Y2024.Day02();
-			//case (2024, 3): return new AdventOfCode.Y2024.Day03();
-			//case (2024, 4): return new AdventOfCode.Y2024.Day04();
-			//case (2024, 5): return new AdventOfCode.Y2024.Day05();
-			//case (2024, 6): return new AdventOfCode.Y2024.Day06();
-			//case (2024, 7): return new AdventOfCode.Y2024.Day07();
-			//case (2024, 8): return new AdventOfCode.Y2024.Day08();
+			case (2024, 3): return new AdventOfCode.Y2024.Day03();
+			case (2024, 4): return new AdventOfCode.Y2024.Day04();
+			case (2024, 5): return new AdventOfCode.Y2024.Day05();
+			case (2024, 6): return new AdventOfCode.Y2024.Day06();
+			case (2024, 7): return new AdventOfCode.Y2024.Day07();
+			case (2024, 8): return new AdventOfCode.Y2024.Day08();
 			//case (2024, 9): return new AdventOfCode.Y2024.Day09();
 			//case (2024, 10): return new AdventOfCode.Y2024.Day10();
 			//case (2024, 11): return new AdventOfCode.Y2024.Day11();
