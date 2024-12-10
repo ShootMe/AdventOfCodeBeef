@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 namespace AdventOfCode.Y2023;
-
+[Reflect, AlwaysInclude(AssumeInstantiated = true)]
 class Day14 : IDay
 {
 	public void Solve(StringView input, String output)

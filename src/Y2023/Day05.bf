@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 namespace AdventOfCode.Y2023;
-
+[Reflect, AlwaysInclude(AssumeInstantiated = true)]
 class Day05 : IDay
 {
 	private List<Seed> seeds1, seeds2;

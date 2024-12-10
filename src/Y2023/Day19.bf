@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 namespace AdventOfCode.Y2023;
-
+[Reflect, AlwaysInclude(AssumeInstantiated = true)]
 class Day19 : IDay
 {
 	private Dictionary<StringView, WorkFlow> flows = new .() ~ delete _;

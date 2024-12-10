@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 namespace AdventOfCode.Y2023;
-
+[Reflect, AlwaysInclude(AssumeInstantiated = true)]
 class Day22 : IDay
 {
 	private List<Brick> bricks = new .() ~ DeleteContainerAndItems!(_);

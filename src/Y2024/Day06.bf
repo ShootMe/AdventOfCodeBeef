@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 namespace AdventOfCode.Y2024;
-
+[Reflect, AlwaysInclude(AssumeInstantiated = true)]
 class Day06 : IDay
 {
 	private struct Vector2 : IHashable

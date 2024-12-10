@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 namespace AdventOfCode.Y2024;
-
+[Reflect, AlwaysInclude(AssumeInstantiated = true)]
 class Day07 : IDay
 {
 	public void Solve(StringView input, String output)
@@ -34,8 +34,7 @@ class Day07 : IDay
 					}
 					if (use3)
 					{
-						int mult = (int)Math.Pow(10, (int)Math.Log10(operand) + 1);
-						if (TryNext(index + 1, current * mult + operand, use3) == value)
+						if (TryNext(index + 1, current * GetBase10(operand) + operand, use3) == value)
 						{
 							return value;
 						}
@@ -52,5 +51,14 @@ class Day07 : IDay
 		}
 
 		output.Append(scope $"{total1}\n{total2}");
+	}
+	private static int GetBase10(int num)
+	{
+		int i = 1;
+		while (i <= num)
+		{
+			i *= 10;
+		}
+		return i;
 	}
 }

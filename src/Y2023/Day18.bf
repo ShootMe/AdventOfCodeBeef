@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Globalization;
 namespace AdventOfCode.Y2023;
-
+[Reflect, AlwaysInclude(AssumeInstantiated = true)]
 class Day18 : IDay
 {
 	private const int[4] DirX = .(1, 0, -1, 0);
