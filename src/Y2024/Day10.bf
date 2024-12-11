@@ -67,7 +67,6 @@ class Day10 : IDay
 			}
 		}
 
-
 		output.Append(scope $"{total1}\n{total2}");
 	}
 }
