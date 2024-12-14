@@ -16,48 +16,38 @@ extension Int
 	}
 	public int PopCnt()
 	{
-	    const uint c1 = 0x55555555'55555555;
-	    const uint c2 = 0x33333333'33333333;
-	    const uint c3 = 0x0F0F0F0F'0F0F0F0F;
-	    const uint c4 = 0x01010101'01010101;
+		const uint c1 = 0x55555555'55555555;
+		const uint c2 = 0x33333333'33333333;
+		const uint c3 = 0x0F0F0F0F'0F0F0F0F;
+		const uint c4 = 0x01010101'01010101;
 
 		uint value = (uint)this;
-	    value -= (value >> 1) & c1;
-	    value = (value & c2) + ((value >> 2) & c2);
-	    value = (((value + (value >> 4)) & c3) * c4) >> 56;
+		value -= (value >> 1) & c1;
+		value = (value & c2) + ((value >> 2) & c2);
+		value = (((value + (value >> 4)) & c3) * c4) >> 56;
 
-	    return (int)value;
+		return (int)value;
 	}
 }
 extension StringView
 {
-	public delegate T Parser<T>(StringView data);
-	public void ToLines(List<StringView> lines, char8 splitChar = '\n')
+	public delegate void Parser(StringView data);
+	public void Parse(Parser parser, char8 splitChar = '\n', bool keepEmpty = true)
 	{
-		for (StringView line in this.Split(splitChar))
-		{
-			lines.Add(line);
-		}
-	}
-	public void Parse<T>(List<T> splits, Parser<T> parser, char8 splitChar = '\n')
-	{
-		splits.Clear();
 		int start = 0;
-		char8 last = splitChar;
 		for (int end = 0; end < this.Length; end++)
 		{
 			char8 c = this[end];
 			if (c == splitChar)
 			{
-				if (last != c)
+				if (start < end || keepEmpty)
 				{
-					splits.Add(parser(this[start ... end - 1]));
+					parser(this.Substring(start, end - start));
 				}
 				start = end + 1;
 			}
-			last = c;
 		}
-		splits.Add(parser(this[start...]));
+		parser(this[start...]);
 	}
 	public void SplitOn(List<StringView> output, params StringView[] splits)
 	{
@@ -78,10 +68,26 @@ extension StringView
 			output.Add(this[index...]);
 		}
 	}
+	public void ExtractInts(List<int> numbers)
+	{
+		int index = 0;
+		while (index < this.Length)
+		{
+			int num = (.)this[index++] - 0x30;
+			if (num < 0 || num > 9) { continue; }
+
+			char8 c;
+			while (index < this.Length && (c = this[index++]) >= '0' && c <= '9')
+			{
+				num = num * 10 + (.)c - 0x30;
+			}
+			numbers.Add(num);
+		}
+	}
 	public void ToInts(List<int> numbers, char8 splitChar = '\n')
 	{
-		int Parse(StringView data) { return data.ToInt(); }
-		this.Parse(numbers, scope => Parse, splitChar);
+		numbers.Clear();
+		this.Parse(scope (item) => numbers.Add(item.ToInt()), splitChar, false);
 	}
 	public int ToInt()
 	{

@@ -25,7 +25,7 @@ class Day06 : IDay
 	public void Solve(StringView input, String output)
 	{
 		List<StringView> grid = scope .();
-		input.ToLines(grid);
+		input.Parse(scope (item) => grid.Add(item));
 
 		int height = grid.Count, width = grid[0].Length;
 		int startX = -1, startY = -1;

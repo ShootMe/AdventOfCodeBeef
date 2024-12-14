@@ -6,9 +6,8 @@ class Day07 : IDay
 {
 	public void Solve(StringView input, String output)
 	{
-		Hand Parse(StringView data) { return .(data); }
 		List<Hand> hands = scope .();
-		input.Parse(hands, scope => Parse);
+		input.Parse(scope (item) => hands.Add(.(item)));
 
 		int SortAndRankHands(bool useJokers)
 		{

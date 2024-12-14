@@ -6,25 +6,15 @@ class Day13 : IDay
 {
 	public void Solve(StringView input, String output)
 	{
-		List<StringView> lines = scope .();
-		input.ToLines(lines);
+		List<int> nums = scope .(2000);
+		input.ExtractInts(nums);
 
 		int total1 = 0, total2 = 0;
-		List<StringView> splits = scope .();
-
-		for (int i = 0; i < lines.Count; i++)
+		for (int i = 0; i < nums.Count; i += 6)
 		{
-			StringView line = lines[i++];
-			line.SplitOn(splits, "X+", ", Y+");
-			int xA = splits[1].ToInt(); int yA = splits[2].ToInt();
-
-			line = lines[i++];
-			line.SplitOn(splits, "X+", ", Y+");
-			int xB = splits[1].ToInt(); int yB = splits[2].ToInt();
-
-			line = lines[i++];
-			line.SplitOn(splits, "X=", ", Y=");
-			int pX = splits[1].ToInt(); int pY = splits[2].ToInt();
+			int xA = nums[i]; int yA = nums[i + 1];
+			int xB = nums[i + 2]; int yB = nums[i + 3];
+			int pX = nums[i + 4]; int pY = nums[i + 5];
 
 			int Solve(int additional = 0)
 			{

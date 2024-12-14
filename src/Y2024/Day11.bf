@@ -7,7 +7,7 @@ class Day11 : IDay
 	public void Solve(StringView input, String output)
 	{
 		List<int> stones = scope .();
-		input.Parse(stones, scope (item) => item.ToInt(), ' ');
+		input.Parse(scope (item) => stones.Add(item.ToInt()), ' ');
 
 		int FindTotalStones(int blinks)
 		{

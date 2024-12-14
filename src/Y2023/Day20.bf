@@ -8,7 +8,7 @@ class Day20 : IDay
 	public void Solve(StringView input, String output)
 	{
 		List<StringView> lines = scope .();
-		input.ToLines(lines);
+		input.Parse(scope (item) => lines.Add(item));
 
 		for (StringView line in lines)
 		{

@@ -7,7 +7,7 @@ class Day04 : IDay
 	public void Solve(StringView input, String output)
 	{
 		List<StringView> cards = scope .();
-		input.ToLines(cards);
+		input.Parse(scope (item) => cards.Add(item));
 
 		int total = 0;
 		int[] scorecardCounts = scope .[cards.Count];

@@ -8,7 +8,7 @@ class Day05 : IDay
 	public void Solve(StringView input, String output)
 	{
 		List<StringView> mappings = scope .();
-		input.ToLines(mappings);
+		input.Parse(scope (item) => mappings.Add(item));
 
 		List<int> numbers = scope .();
 		mappings[0].Substring(7).ToInts(numbers, ' ');

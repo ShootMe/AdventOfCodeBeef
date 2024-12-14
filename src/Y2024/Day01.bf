@@ -6,8 +6,8 @@ class Day01 : IDay
 {
 	public void Solve(StringView input, String output)
 	{
-		List<StringView> lines = scope .();
-		input.ToLines(lines);
+		List<StringView> lines = scope .(1000);
+		input.Parse(scope (item) => lines.Add(item));
 
 		int32[] left = scope int32[lines.Count];
 		int32[] right = scope int32[lines.Count];

@@ -49,18 +49,15 @@ class Day02 : IDay
 		}
 
 		int total1 = 0, total2 = 0;
-		for (StringView line in input.Split('\n'))
-		{
-			length = 0;
-			for (StringView num in line.Split(' '))
+		input.Parse(scope [&] (line) =>
 			{
-				levels[length++] = num.ToInt();
-			}
+				length = 0;
+				line.Parse(scope [&] (num) => levels[length++] = num.ToInt(), ' ');
 
-			bool isSafe = IsSafe(levels, length);
-			total1 += isSafe ? 1 : 0;
-			total2 += isSafe || IsTolerate() ? 1 : 0;
-		}
+				bool isSafe = IsSafe(levels, length);
+				total1 += isSafe ? 1 : 0;
+				total2 += isSafe || IsTolerate() ? 1 : 0;
+			});
 
 		output.Append(scope $"{total1}\n{total2}");
 	}

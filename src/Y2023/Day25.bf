@@ -75,7 +75,7 @@ class Day25 : IDay
 		Dictionary<StringView, Node> nodesByName = scope .();
 		int count = 0;
 		List<StringView> lines = scope .();
-		input.ToLines(lines);
+		input.Parse(scope (item) => lines.Add(item));
 
 		for (StringView line in lines)
 		{

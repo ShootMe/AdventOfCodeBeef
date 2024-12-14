@@ -7,7 +7,7 @@ class Day01 : IDay
 	public void Solve(StringView input, String output)
 	{
 		List<StringView> calibrations = scope .();
-		input.ToLines(calibrations);
+		input.Parse(scope (item) => calibrations.Add(item));
 
 		int32 FindTotalDigitSum(bool includeLetters)
 		{

@@ -65,7 +65,7 @@ class Day24 : IDay
 	private void ParseInput(StringView input)
 	{
 		List<StringView> lines = scope .();
-		input.ToLines(lines);
+		input.Parse(scope (item) => lines.Add(item));
 
 		List<StringView> splits = scope .();
 		for (StringView line in lines)

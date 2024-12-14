@@ -17,7 +17,7 @@ class Day23 : IDay
 	private void ParseInput(StringView input)
 	{
 		List<StringView> lines = scope .();
-		input.ToLines(lines);
+		input.Parse(scope (item) => lines.Add(item));
 
 		width = (.)lines[0].Length;
 		height = (.)lines.Count;

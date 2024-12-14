@@ -26,11 +26,16 @@ class Program
 			file.GetFilePath(fileName);
 			//if (fileName.IndexOf("Example", true) >= 0) { continue; }
 
-			IDay day = GetDay(2024, fileName);
+			IDay day = GetDay(fileName);
 			if (day == null) { continue; }
 
 			String inputData = new .();
 			File.ReadAllText(fileName, inputData);
+			if (inputData.IndexOf('\r') >= 0)
+			{
+				inputData.Replace("\r", "");
+				File.WriteAllText(fileName, inputData);
+			}
 
 			dayTimer.Restart();
 
@@ -45,10 +50,10 @@ class Program
 			file.GetFileName(fileName);
 
 			List<StringView> answers = scope .();
-			fileName.Substring(0, fileName.Length - 4).ToLines(answers, '~');
+			fileName.Substring(0, fileName.Length - 4).Parse(scope (item) => answers.Add(item), '~');
 
 			List<StringView> answersToCheck = scope .();
-			((StringView)results).ToLines(answersToCheck, '\n');
+			((StringView)results).Parse(scope (item) => answersToCheck.Add(item), '\n');
 			if (answersToCheck.Count < 2) { answersToCheck.Add("n/a"); answersToCheck.Add("n/a"); }
 
 			WritePadded(scope $"{fileName}", 50, ' ', ConsoleColor.Yellow);
@@ -74,10 +79,12 @@ class Program
 		WriteLine(scope $"{allTimer.TotalSeconds:0.000000}", ConsoleColor.Gray);
 		Console.ReadLine(scope .());
 	}
-	private static IDay GetDay(int year, StringView name)
+	private static IDay GetDay(StringView name)
 	{
 		int index = name.IndexOf("puzzle", true);
 		int num = name[index + 6 ... index + 8].ToInt();
+		index = name.IndexOf(' ');
+		int year = name[0 ... index].ToInt();
 
 		String dayTypeName = scope $"AdventOfCode.Y{year}.Day{num:00}";
 

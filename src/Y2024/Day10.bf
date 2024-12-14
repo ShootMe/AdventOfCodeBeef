@@ -16,7 +16,7 @@ class Day10 : IDay
 	public void Solve(StringView input, String output)
 	{
 		List<StringView> grid = scope .();
-		input.ToLines(grid);
+		input.Parse(scope (item) => grid.Add(item));
 		int height = grid.Count, width = grid[0].Length;
 
 		HashSet<Vector2> seen = new .();

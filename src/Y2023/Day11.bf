@@ -7,7 +7,7 @@ class Day11 : IDay
 	public void Solve(StringView input, String output)
 	{
 		List<StringView> space = scope .();
-		input.ToLines(space);
+		input.Parse(scope (item) => space.Add(item));
 
 		int height = space.Count;
 		int width = space[0].Length;

@@ -7,7 +7,7 @@ class Day15 : IDay
 	public void Solve(StringView input, String output)
 	{
 		List<StringView> sequenceValues = scope .();
-		input.ToLines(sequenceValues, ',');
+		input.Parse(scope (item) => sequenceValues.Add(item), ',');
 		Label[] sequences = scope .[sequenceValues.Count];
 		for (int i = 0; i < sequences.Count; i++)
 		{

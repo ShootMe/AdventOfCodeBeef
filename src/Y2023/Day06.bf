@@ -7,25 +7,26 @@ class Day06 : IDay
 	public void Solve(StringView input, String output)
 	{
 		List<StringView> lines = scope .();
-		input.ToLines(lines);
+		input.Parse(scope (item) => lines.Add(item));
 
-		List<int> times = scope .();
-		lines[0].Substring(5).ToInts(times, ' ');
-		List<int> distances = scope .();
-		lines[1].Substring(9).ToInts(distances, ' ');
+		List<int> numbers = scope .();
+		input.ExtractInts(numbers);
 		int timeAll = lines[0].ToInt();
 		int distanceAll = lines[1].ToInt();
 
 		int total = 1;
-		for (int i = 0; i < times.Count; i++) {
-		    total *= CalculateWins(times[i], distances[i]);
+		int split = numbers.Count / 2;
+		for (int i = 0; i < split; i++)
+		{
+			total *= CalculateWins(numbers[i], numbers[i + split]);
 		}
 
 		output.Append(scope $"{total}\n{CalculateWins(timeAll, distanceAll)}");
 	}
-	private int CalculateWins(int time, int distance) {
-	    int maxVal = (int)Math.Ceiling((time + Math.Sqrt(time * time - 4 * distance)) / 2d);
-	    int minVal = (int)((time - Math.Sqrt(time * time - 4 * distance)) / 2d);
-	    return maxVal - minVal - 1;
+	private int CalculateWins(int time, int distance)
+	{
+		int maxVal = (int)Math.Ceiling((time + Math.Sqrt(time * time - 4 * distance)) / 2d);
+		int minVal = (int)((time - Math.Sqrt(time * time - 4 * distance)) / 2d);
+		return maxVal - minVal - 1;
 	}
 }

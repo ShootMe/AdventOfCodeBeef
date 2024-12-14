@@ -16,7 +16,7 @@ class Day12 : IDay
 	public void Solve(StringView input, String output)
 	{
 		List<StringView> map = scope .();
-		input.ToLines(map);
+		input.Parse(scope (item) => map.Add(item));
 		int height = map.Count, width = map[0].Length;
 
 		Queue<Vector2> open = new .();
