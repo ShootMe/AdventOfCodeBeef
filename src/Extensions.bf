@@ -75,13 +75,13 @@ extension StringView
 		{
 			int num = (.)this[index++] - 0x30;
 			if (num < 0 || num > 9) { continue; }
-
+			bool isNegative = index - 2 >= 0 && this[index - 2] == '-';
 			char8 c;
 			while (index < this.Length && (c = this[index++]) >= '0' && c <= '9')
 			{
 				num = num * 10 + (.)c - 0x30;
 			}
-			numbers.Add(num);
+			numbers.Add(isNegative ? -num : num);
 		}
 	}
 	public void ToInts(List<int> numbers, char8 splitChar = '\n')

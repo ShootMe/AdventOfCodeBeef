@@ -19,7 +19,7 @@ https://adventofcode.com/
  11 | :star: :star: | :star: :star: |
  12 | :star: :star: | :star: :star: |
  13 | :star: :star: | :star: :star: |
- 14 | :star: :star: | |
+ 14 | :star: :star: | :star: :star: |
  15 | :star: :star: | |
  16 | :star: :star: | |
  17 | :star: :star: | |

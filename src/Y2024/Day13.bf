@@ -21,11 +21,11 @@ class Day13 : IDay
 				int denominator = xA * yB - yA * xB;
 				if (denominator != 0)
 				{
-					int bB = (xA * (pY + additional) - yA * (pX + additional)) / denominator;
-					int bA = (yB * (pX + additional) - xB * (pY + additional)) / denominator;
-					if (xA * bA + xB * bB == pX + additional)
+					int bA = yB * (pX + additional) - xB * (pY + additional);
+					int bB = xA * (pY + additional) - yA * (pX + additional);
+					if (bA % denominator == 0 && bB % denominator == 0)
 					{
-						return bA * 3 + bB;
+						return (bA * 3 + bB) / denominator;
 					}
 				}
 				return 0;
