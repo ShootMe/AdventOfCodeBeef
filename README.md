@@ -20,8 +20,8 @@ https://adventofcode.com/
  12 | :star: :star: | :star: :star: |
  13 | :star: :star: | :star: :star: |
  14 | :star: :star: | :star: :star: |
- 15 | :star: :star: | |
- 16 | :star: :star: | |
+ 15 | :star: :star: | :star: :star: |
+ 16 | :star: :star: | :star: :star: |
  17 | :star: :star: | |
  18 | :star: :star: | |
  19 | :star: :star: | |
