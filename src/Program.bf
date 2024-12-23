@@ -14,7 +14,7 @@ class Program
 
 		WritePadded("File", 50);
 		Write(" | ", ConsoleColor.Blue);
-		WritePadded("Results", 40);
+		WritePadded("Results", 47);
 		Write(" | ", ConsoleColor.Blue);
 		WriteLine("Took");
 		WritePadded(String.Empty, 112, '-', ConsoleColor.Blue);
@@ -56,15 +56,15 @@ class Program
 			((StringView)results).Parse(scope (item) => answersToCheck.Add(item), '\n');
 			if (answersToCheck.Count < 2) { answersToCheck.Add("n/a"); answersToCheck.Add("n/a"); }
 
-			WritePadded(scope $"{fileName}", 50, ' ', ConsoleColor.Yellow);
+			WritePadded(scope $"{fileName.Substring(6, fileName.Length - 10)}", 50, ' ', ConsoleColor.Yellow);
 			Write(" | ", ConsoleColor.Blue);
 			Write(scope $"{answersToCheck[0]} ", answersToCheck[0] == answers[1] ? ConsoleColor.Green : ConsoleColor.Red);
 			if (answers[2].Length > 0)
 			{
-				WritePadded(scope $"{answersToCheck[1]}", 39 - answersToCheck[0].Length, ' ', answersToCheck[1] == answers[2] ? ConsoleColor.Green : ConsoleColor.Red);
+				WritePadded(scope $"{answersToCheck[1]}", 46 - answersToCheck[0].Length, ' ', answersToCheck[1] == answers[2] ? ConsoleColor.Green : ConsoleColor.Red);
 			} else
 			{
-				WritePadded("", 39 - answersToCheck[0].Length, ' ');
+				WritePadded("", 46 - answersToCheck[0].Length, ' ');
 			}
 			Write(" | ", ConsoleColor.Blue);
 			WriteLine(scope $"{dayTimer.Elapsed.TotalSeconds:0.000000}", ConsoleColor.Gray);
@@ -75,7 +75,7 @@ class Program
 		WritePadded(String.Empty, 112, '-', ConsoleColor.Blue);
 		WriteLine();
 
-		WritePadded(scope $"Total:", 96);
+		WritePadded(scope $"Total:", 103);
 		WriteLine(scope $"{allTimer.TotalSeconds:0.000000}", ConsoleColor.Gray);
 		Console.ReadLine(scope .());
 	}
